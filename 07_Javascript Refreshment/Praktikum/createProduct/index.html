@@ -65,6 +65,7 @@
       </div>
 
       <!-- --------------------------------Form-------------------------------- -->
+      
       <div class="d-flex flex-column w-100 my-5">
         <div class="d-flex m-auto">
           <h3>Detail Product</h3>
@@ -88,7 +89,7 @@
               >Product Category</label
             >
 
-            <div class="dropdown">
+            <!-- <div class="dropdown">
               <button
                 class="btn btn-light dropdown-toggle"
                 type="button"
@@ -108,7 +109,20 @@
                   Something else here
                 </button>
               </div>
-            </div>
+            </div> -->
+
+            <select
+              class="form-select"
+              id="product-category"
+              name="product-category"
+              required
+            >
+              <option value="" selected disabled>Choose..</option>
+              <option value="Category 1">Category 1</option>
+              <option value="Category 2">Category 2</option>
+              <option value="Category 3">Category 3</option>
+            </select>
+            <div id="product-category-error" class="text-danger"></div>
           </div>
 
           <div class="mb-3 mx-3">
@@ -326,33 +340,35 @@
       //     productNameError.textContent = "";
       //   }
       // });
+      document.addEventListener("DOMContentLoaded", function () {
+        const productName = document.getElementById("product-name");
+        const productNameError = document.getElementById("product-name-error");
+        const productForm = document.getElementById("detail-product-form");
 
-      const productName = document.getElementById("product-name");
-      const productNameError = document.getElementById("product-name-error");
-      const productCategory = document.getElementById("product-category");
-      const productCategoryError = document.getElementById(
-        "product-category-error"
-      );
-      const productForm = document.getElementById("product-form");
+        productForm.addEventListener("submit", function (event) {
+          productNameError.textContent = "";
 
-      productForm.addEventListener("submit", function (event) {
-        productNameError.textContent = "";
-        productCategoryError.textContent = "";
+          // Validasi Product Name
+          if (productName.value.trim() === "") {
+            productNameError.textContent = "Product Name cannot be empty.";
+            event.preventDefault();
+          } else if (productName.value.length > 25) {
+            productNameError.textContent =
+              "Product Name must not exceed 25 characters.";
+            event.preventDefault();
+          } else if (!/^[a-zA-Z0-9\s]+$/.test(productName.value)) {
+            productNameError.textContent =
+              "Product Name must not contain symbols.";
+            event.preventDefault();
+          }
 
-        if (productName.value.trim().length === 0) {
-          productNameError.textContent = "Product Name cannot be empty.";
-          event.preventDefault();
-        } else if (productName.value.length > 25) {
-          productNameError.textContent =
-            "Product Name should not exceed 25 characters.";
-          event.preventDefault();
-        }
-
-        if (productCategory.value.trim().length === 0) {
-          productCategoryError.textContent =
-            "Product Category cannot be empty.";
-          event.preventDefault();
-        }
+          // Validasi Product Name
+          if (productCategory.value === "") {
+            productCategoryError.textContent =
+              "Please select a product category.";
+            event.preventDefault();
+          }
+        });
       });
     </script>
 
