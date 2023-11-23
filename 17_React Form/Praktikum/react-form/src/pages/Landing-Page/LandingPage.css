@@ -1,0 +1,28 @@
+.section-1 {
+  background-color: #37517e;
+}
+
+.section-2 {
+  background-color: #f3f5fa;
+}
+
+.text2-section1 {
+  color: #ffffff;
+  opacity: 60%;
+}
+
+.text2-section2 {
+  color: #37517e;
+}
+
+img {
+  width: 700px;
+}
+
+.button-start {
+  background-color: #47b2e4;
+}
+
+.button-subscribe {
+  background-color: #47b2e4;
+}
